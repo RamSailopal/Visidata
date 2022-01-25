@@ -2,5 +2,5 @@ tasks:
   - init: |
       echo 'TODO: build project'
     command: |
-      docker run -p 9100:9100 -d vistadataproject/nodevista999 && python -pip install visidata && visidata "http://192.168.240.21:9100/fmqlEP?fmql=SELECT%209_6%20LIMIT%20100"
+      docker run -p 9100:9100 -d vistadataproject/nodevista999 && python3 -m pip install visidata && visidata "http://localhost:9100/fmqlEP?fmql=SELECT%209_6%20LIMIT%20100"
 
