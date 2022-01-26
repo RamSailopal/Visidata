@@ -2,7 +2,7 @@
 
 # Installing and running
 
-With Visidata already installed and YottaDB/mg-gateway already installed somewhere on the network:
+With Visidata/mg_python already installed and YottaDB/mg-gateway already installed somewhere on the network:
 
     git clone https://github.com/RamSailopal/Visidata.git
     cd Visidata
