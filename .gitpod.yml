@@ -2,5 +2,5 @@ tasks:
   - init: |
       echo 'TODO: build project'
     command: |
-      docker run -v $PWD/entrypoint:/home/entrypoint --entrypoint /home/entrypoint/entrypoint.sh -p 7041:7041 -d ramb0/yottadb-gateway && python3 -m pip install visidata && cp .visidatarc ~/.visidatarc && /home/gitpod/.pyenv/versions/3.8.12/bin/visidata yottadb://localhost/^CARS/,
+      docker run -v $PWD/entrypoint:/home/entrypoint --entrypoint /home/entrypoint/entrypoint.sh -p 7041:7041 -d ramb0/yottadb-gateway && python3 -m pip install visidata && cp .visidatarc ~/.visidatarc && sleep 1 & /home/gitpod/.pyenv/versions/3.8.12/bin/visidata yottadb://localhost/^CARS/,
 
