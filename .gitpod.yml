@@ -2,5 +2,5 @@ tasks:
   - init: |
       echo 'TODO: build project'
     command: |
-      docker run -p 9000:9000 -d vistadataproject/nodevista999 && python3 -m pip install visidata && /home/gitpod/.pyenv/versions/3.8.12/bin/visidata "http://localhost:9000/fmqlEP?fmql=DESCRIBE%2050_67%20LIMIT%201000"
+      docker run -v $PWD/entrypoint:/home/entrypoint --entrypoint /home/entrypoint/entrypoint.sh -p 7041:7041 -d ramb0/yottadb-gateway && python3 -m pip install visidata && cp .visidatarc ~/.visidatarc && /home/gitpod/.pyenv/versions/3.8.12/bin/visidata yottadb://localhost/^CARS/,
 
