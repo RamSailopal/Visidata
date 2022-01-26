@@ -8,9 +8,9 @@ tasks:
       cd /usr/local &&
       sudo git clone https://github.com/chrisemunt/mg_python.git &&
       cd /usr/local/mg_python/src &&
-      /home/gitpod/.pyenv/versions/3.8.12/bin/python3 setup.py install
+      sudo /home/gitpod/.pyenv/versions/3.8.12/bin/python3 setup.py install
       python3 -m pip install visidata && 
-      cp .visidatarc ~/.visidatarc && 
+      cp /workspace/Visidata/.visidatarc ~/.visidatarc && 
       sleep 1 && 
       /home/gitpod/.pyenv/versions/3.8.12/bin/visidata yottadb://localhost/^CARS/,
 
