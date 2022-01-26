@@ -40,3 +40,5 @@ To import this into Visidata and with yottadb running on the same server, we run
 Visidata - https://www.visidata.org/
 
 YottaDB - https://yottadb.com/
+
+mg_python - https://github.com/chrisemunt/mg_python
