@@ -1,0 +1,37 @@
+import visidata
+import mg_python
+import sys
+@VisiData.api
+def openurl_yottadb(vd, path, filetype='None'):
+    sect=str(path).split("/")
+    if len(sect) < 5:
+       print("yottadb://host/global/delimiter")
+       sys.exit(0)
+    glbal=sect[3]
+    host=sect[2]
+    delim=sect[4]
+    if glbal=="" or host=="" or delim=="":
+        print("yottadb://host/global/delimiter")
+        sys.exit(0)
+    mg_python.m_set_host(0, host, 7041, "", "")
+    key = mg_python.m_order(0, glbal, "")
+    bits=mg_python.m_get(0, glbal, key).split(delim)
+    count=0
+    sheet = visidata.vd.openSource("new",filetype="None",create=True)
+    sheet.columns = []
+    sheet.addColumn(Column(key, getter=lambda col, row: row[0]))
+    sheet.rowtype = 'csv'
+    sheet.name = f'YottaDB'
+    while count < len(bits):
+       cmd = "sheet.addColumn(Column('" + bits[count] + "', getter=lambda col, row: row[" + str(count+1) + "]))"
+       eval(cmd)
+       count+=1
+    sheet.rows = []
+    key = mg_python.m_order(0, glbal, key)
+    while (key != ""):
+       stryng=key + delim + mg_python.m_get(0, glbal, key)
+       bits=stryng.split(delim)
+       sheet.addRow(bits)
+       key  = mg_python.m_order(0, glbal, key)
+    
+    return sheet
