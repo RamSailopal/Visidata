@@ -34,3 +34,9 @@ To import this into Visidata and with yottadb running on the same server, we run
 
 
 ![Alt text](visidata.JPG?raw=true "Gitpod View")
+
+# References
+
+Visidata - https://www.visidata.org/
+
+YottaDB - https://yottadb.com/
