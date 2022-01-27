@@ -1,20 +1,45 @@
 import visidata
 import mg_python
 import sys
+import string
 @VisiData.api
 def openurl_yottadb(vd, path, filetype='None'):
     sect=str(path).split("/")
     if len(sect) < 5:
-       print("yottadb://host/global/delimiter")
+       print("yottadb://host:port/global/delimiter")
        sys.exit(0)
     glbal=sect[3]
-    host=sect[2]
+    if glbal.find("^") == -1:
+       print("Ensure that ^ is passed with the global")
+       sys.exit(0)
+    hostport=sect[2]
+    if hostport.find(":") == -1:
+       print("yottadb://host:port/global/delimiter")
+       sys.exit(0)
+    hostport1=hostport.split(":")
+    host=hostport1[0]
+    port=hostport1[1]
     delim=sect[4]
-    if glbal=="" or host=="" or delim=="":
-        print("yottadb://host/global/delimiter")
+    if glbal=="" or host=="" or port=="" or delim=="":
+        print("yottadb://host:port/global/delimiter")
         sys.exit(0)
-    mg_python.m_set_host(0, host, 7041, "", "")
-    key = mg_python.m_order(0, glbal, "")
+    for i in port:
+       if i not in string.digits or len(port) != 4:
+          print("Port should be 4 digits")
+          sys.exit(0)
+    try:
+       mg_python.m_set_host(0, host, int(port), "", "")
+    except:
+       print("Couldn't connect to database")
+       sys.exit(0)
+    try:
+       key = mg_python.m_order(0, glbal, "")
+    except:
+       print("Couldn't connect to database and reference global " + glbal)
+       sys.exit(0)
+    if key == "":
+       print("No data in global " + glbal)
+       sys.exit(0)
     bits=mg_python.m_get(0, glbal, key).split(delim)
     count=0
     sheet = visidata.vd.openSource("new",filetype="None",create=True)
