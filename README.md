@@ -26,7 +26,7 @@ It is assumed that the global in question is in a "flat" format with the first o
 
 To import this into Visidata and with yottadb running on the same server, we run:
 
-     vd yottadb://localhost/^CARS/,
+     vd yottadb://localhost:7041/^CARS/,
      
  # Gitpod Demo
  
