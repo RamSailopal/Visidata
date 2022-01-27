@@ -2,7 +2,7 @@
 
 # Installing and running
 
-With Visidata already installed and YottaDB/mg-gateway already installed somewhere on the network:
+With Visidata/mg_python already installed and YottaDB/mg-gateway already installed somewhere on the network:
 
     git clone https://github.com/RamSailopal/Visidata.git
     cd Visidata
@@ -31,3 +31,14 @@ To import this into Visidata and with yottadb running on the same server, we run
 1) Create a free/paid Gitpod account - https://www.gitpod.io/
 2) Log into the account
 3) Open a new browser tab and add **gitpod.io/#https://github.com/RamSailopal/Visidata** to the address - This will create a new Gitpod cloud instance and display the CARS global above in Visidata.
+
+
+![Alt text](visidata.JPG?raw=true "Gitpod View")
+
+# References
+
+Visidata - https://www.visidata.org/
+
+YottaDB - https://yottadb.com/
+
+mg_python - https://github.com/chrisemunt/mg_python
