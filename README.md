@@ -2,6 +2,8 @@
 
 # Installing and running
 
+YottaDB if referenced in this ReadMe but Intersystems IRIS and Cache databases can also be used as well as GTm
+
 With Visidata/mg_python already installed and YottaDB/mg-gateway already installed somewhere on the network:
 
     git clone https://github.com/RamSailopal/Visidata.git
