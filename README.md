@@ -10,9 +10,9 @@ With Visidata/mg_python already installed and YottaDB/mg-gateway already install
     
 Then execute
 
-    vd yottadb://host/global/delimiter
+    vd yottadb://host:port/global/delimiter
     
-Where host is the host/IP address of the server running YottaDB, global is the global to extract data from and delimiter is the filed delimiter for the subscript values.
+Where host is the host/IP address of the server running YottaDB, port is the port, global is the global to extract data from and delimiter is the filed delimiter for the subscript values.
 
 It is assumed that the global in question is in a "flat" format with the first ordered subscript the headers and the rest the values i.e.
 
