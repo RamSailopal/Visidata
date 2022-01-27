@@ -12,5 +12,5 @@ tasks:
       python3 -m pip install visidata && 
       cp /workspace/Visidata/.visidatarc ~/.visidatarc && 
       sleep 1 && 
-      /home/gitpod/.pyenv/versions/3.8.12/bin/visidata yottadb://localhost/^CARS/,
+      /home/gitpod/.pyenv/versions/3.8.12/bin/visidata yottadb://localhost:7041/^CARS/,
 
