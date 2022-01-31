@@ -7,7 +7,6 @@ class Yotta(Sheet):
     def iterload(self):
        import mg_python
        import sys
-       import time
        sect=str(self.source).split("/")
        glbal=sect[3]
        hostport=sect[2]
