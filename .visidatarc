@@ -27,7 +27,6 @@ class Yotta(Sheet):
           sys.exit(1)
        bits=mg_python.m_get(0, glbal, key).split(delim)
        count=0
-       #sheet = visidata.vd.openSource("new",filetype="None",create=True)
        self.columns = []
        self.addColumn(Column(key, getter=lambda col, row: row[0]))
        while count < len(bits):
@@ -40,7 +39,6 @@ class Yotta(Sheet):
        while key != "":
           stryng=key + delim + mg_python.m_get(0, glbal, key)
           bits=stryng.split(delim)
-          #self.addRow(bits)
           MyList.append(bits)
           key  = mg_python.m_order(0, glbal, key)
        yield from Progress(MyList, total=len(MyList))
