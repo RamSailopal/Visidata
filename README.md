@@ -2,6 +2,8 @@
 
 # Installing and running
 
+YottaDB if referenced in this ReadMe but Intersystems IRIS and Cache databases can also be used as well as GTm
+
 With Visidata/mg_python already installed and YottaDB/mg-gateway already installed somewhere on the network:
 
     git clone https://github.com/RamSailopal/Visidata.git
@@ -10,9 +12,9 @@ With Visidata/mg_python already installed and YottaDB/mg-gateway already install
     
 Then execute
 
-    vd yottadb://host/global/delimiter
+    vd yottadb://host:port/global/delimiter
     
-Where host is the host/IP address of the server running YottaDB, global is the global to extract data from and delimiter is the filed delimiter for the subscript values.
+Where host is the host/IP address of the server running YottaDB, port is the port, global is the global to extract data from and delimiter is the filed delimiter for the subscript values.
 
 It is assumed that the global in question is in a "flat" format with the first ordered subscript the headers and the rest the values i.e.
 
@@ -24,7 +26,7 @@ It is assumed that the global in question is in a "flat" format with the first o
 
 To import this into Visidata and with yottadb running on the same server, we run:
 
-     vd yottadb://localhost/^CARS/,
+     vd yottadb://localhost:7041/^CARS/,
      
  # Gitpod Demo
  
