@@ -35,7 +35,7 @@ To import this into Visidata and with yottadb running on the same server, we run
 3) Open a new browser tab and add **gitpod.io/#https://github.com/RamSailopal/Visidata** to the address - This will create a new Gitpod cloud instance and display the CARS global above in Visidata. Any subsequent changes to data in the CARS global will be reflected in Visidata once a reload (Ctrl+R) is actioned.
 
 
-![Alt text](visidata.JPG?raw=true "Gitpod View")
+![Alt text](visidata.webp?raw=true "Gitpod View")
 
 # References
 
