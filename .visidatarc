@@ -1,62 +1,46 @@
 import visidata
-import mg_python
-import sys
-import string
 @VisiData.api
 def openurl_yottadb(vd, path, filetype='None'):
-    sect=str(path).split("/")
-    if len(sect) < 5:
-       print("yottadb://host:port/global/delimiter")
-       sys.exit(0)
-    glbal=sect[3]
-    if glbal.find("^") == -1:
-       print("Ensure that ^ is passed with the global")
-       sys.exit(0)
-    hostport=sect[2]
-    if hostport.find(":") == -1:
-       print("yottadb://host:port/global/delimiter")
-       sys.exit(0)
-    hostport1=hostport.split(":")
-    host=hostport1[0]
-    port=hostport1[1]
-    delim=sect[4]
-    if glbal=="" or host=="" or port=="" or delim=="":
-        print("yottadb://host:port/global/delimiter")
-        sys.exit(0)
-    for i in port:
-       if i not in string.digits or len(port) != 4:
-          print("Port should be 4 digits")
-          sys.exit(0)
-    try:
-       mg_python.m_set_host(0, host, int(port), "", "")
-    except:
-       print("Couldn't connect to database")
-       sys.exit(0)
-    try:
-       key = mg_python.m_order(0, glbal, "")
-    except:
-       print("Couldn't connect to database and reference global " + glbal)
-       sys.exit(0)
-    if key == "":
-       print("No data in global " + glbal)
-       sys.exit(0)
-    bits=mg_python.m_get(0, glbal, key).split(delim)
-    count=0
-    sheet = visidata.vd.openSource("new",filetype="None",create=True)
-    sheet.columns = []
-    sheet.addColumn(Column(key, getter=lambda col, row: row[0]))
-    sheet.rowtype = 'csv'
-    sheet.name = f'YottaDB'
-    while count < len(bits):
-       cmd = "sheet.addColumn(Column('" + bits[count] + "', getter=lambda col, row: row[" + str(count+1) + "]))"
-       eval(cmd)
-       count+=1
-    sheet.rows = []
-    key = mg_python.m_order(0, glbal, key)
-    while (key != ""):
-       stryng=key + delim + mg_python.m_get(0, glbal, key)
-       bits=stryng.split(delim)
-       sheet.addRow(bits)
-       key  = mg_python.m_order(0, glbal, key)
-    
-    return sheet
+    return Yotta(path.name, source=path)
+
+class Yotta(Sheet):
+    def iterload(self):
+       import mg_python
+       import sys
+       import time
+       sect=str(self.source).split("/")
+       glbal=sect[3]
+       hostport=sect[2]
+       hostport1=hostport.split(":")
+       host=hostport1[0]
+       port=hostport1[1]
+       delim=sect[4]
+       try:
+          mg_python.m_set_host(0, host, int(port), "", "")
+       except:
+          sys.exit(1)
+       try:
+          key = mg_python.m_order(0, glbal, "")
+       except:
+          sys.exit(1)
+       if key == "":
+          sys.exit(1)
+       bits=mg_python.m_get(0, glbal, key).split(delim)
+       count=0
+       #sheet = visidata.vd.openSource("new",filetype="None",create=True)
+       self.columns = []
+       self.addColumn(Column(key, getter=lambda col, row: row[0]))
+       while count < len(bits):
+          cmd = "self.addColumn(Column('" + bits[count] + "', getter=lambda col, row: row[" + str(count+1) + "]))"
+          eval(cmd)
+          count+=1
+       self.rows = []
+       key = mg_python.m_order(0, glbal, key)
+       MyList=[]
+       while key != "":
+          stryng=key + delim + mg_python.m_get(0, glbal, key)
+          bits=stryng.split(delim)
+          #self.addRow(bits)
+          MyList.append(bits)
+          key  = mg_python.m_order(0, glbal, key)
+       yield from Progress(MyList, total=len(MyList))
